@@ -15,8 +15,8 @@ public class PinyinHelperTest extends TestCase {
 	public void testMorePY() throws BadHanyuPinyinOutputFormatCombination {
 		String str = "所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必厌恶也。1÷2=0.5";
 
-		//MultiPinyinConfig.multiPinyinPath = "D:\\workspace_tts\\pinyin4j\\src\\main\\resources\\pinyindb\\regix_pinyin.txt";
-		MultiPinyinConfig.regexPinyinPath = "D:\\workspace_tts\\pinyin4j\\src\\main\\resources\\pinyindb\\regix_pinyin.txt";
+		//MultiPinyinConfig.multiPinyinPath = "D:\\xxx\\pinyin4j\\src\\main\\resources\\pinyindb\\regix_pinyin.txt";
+		MultiPinyinConfig.regexPinyinPath = "D:\\xxx\\pinyin4j\\src\\main\\resources\\pinyindb\\regix_pinyin.txt";
 		HanyuPinyinOutputFormat hanyuPinyinOutputFormat = new HanyuPinyinOutputFormat();
 		hanyuPinyinOutputFormat.setCaseType(HanyuPinyinCaseType.LOWERCASE);
 		hanyuPinyinOutputFormat.setToneType(HanyuPinyinToneType.WITH_TONE_NUMBER); // 用数字表示
@@ -26,45 +26,6 @@ public class PinyinHelperTest extends TestCase {
 		System.out.println(PinyinHelper.toHanYuPinyinString(str, hanyuPinyinOutputFormat, " ", false, true));
 	}
 
-	private static String getAlphabetic(String name, String str) {
-		// 声明字符数组
-		char[] alphabeticArray = null;
-		// 接收字符串中的单个字符
-		alphabeticArray = str.trim().toCharArray();
-		// 声明字符串数组用于接收单个汉字的拼音
-		String[] singleChinese = new String[alphabeticArray.length];
-		/*
-		 * 声明拼音格式对象，用于设置拼音格式
-		 */
-		HanyuPinyinOutputFormat hanyuPinyinOutputFormat = new HanyuPinyinOutputFormat();
-		hanyuPinyinOutputFormat.setCaseType(HanyuPinyinCaseType.LOWERCASE);
-		hanyuPinyinOutputFormat.setToneType(HanyuPinyinToneType.WITH_TONE_NUMBER); // 用数字表示
-		hanyuPinyinOutputFormat.setVCharType(HanyuPinyinVCharType.WITH_V);
-		String result = "", word = "";
-		try {
-			// 遍历每个字符
-			for (int i = 0, size = alphabeticArray.length; i < size; i++) {
-				word = java.lang.Character.toString(alphabeticArray[i]);
-				// 判断当前字符是否为汉字
-				if (word.matches("[\\u4E00-\\u9FA5]+")) {
-					singleChinese = PinyinHelper.toHanyuPinyinStringArray(alphabeticArray[i], hanyuPinyinOutputFormat);
-					try {
-						result += singleChinese[0] + (i == size - 1 ? "" : " ");
-					} catch (Exception e) {
-						// e.printStackTrace();
-						System.out.println(String.format("【%s】转拼音异常：%s", alphabeticArray[i], name));
-					}
-				} else {
-					if (word != null && "".equals(word.trim()) == false) {
-						result = result.trim() + word + " ";
-					}
-				}
-			}
-		} catch (BadHanyuPinyinOutputFormatCombination e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
 
 	public void testToTongyongPinyinStringArray() {
 		// any input of non-Chinese characters will return null
