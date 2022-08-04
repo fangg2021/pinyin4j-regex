@@ -1,8 +1,10 @@
 1、原项目在https://github.com/belerweb/pinyin4j
 
 2、覆盖PinyinHelper.java、Trie.java、MultiPinyinConfig.java文件，引入regix_pinyin.txt格式的文本文件，调用如下：
-    String str = "所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必厌恶也。";
+    
 
+		String str = "所谓诚其意者，毋自欺也，如恶恶臭，如好好色，此之谓自谦，故君子必厌恶也。";
+		
 		MultiPinyinConfig.regexPinyinPath = "D:\\xxx\\pinyin4j\\src\\main\\resources\\pinyindb\\regix_pinyin.txt";
 		HanyuPinyinOutputFormat hanyuPinyinOutputFormat = new HanyuPinyinOutputFormat();
 		hanyuPinyinOutputFormat.setCaseType(HanyuPinyinCaseType.LOWERCASE);
